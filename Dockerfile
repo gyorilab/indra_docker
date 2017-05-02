@@ -16,31 +16,20 @@ ENV BNGPATH=$DIRPATH/BioNetGen-2.2.6-stable
 ENV PATH="$DIRPATH/miniconda/bin:$PATH"
 
 WORKDIR $DIRPATH
-# Install packages via miniconda
-RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh && \
-    chmod +x miniconda.sh && \
-    bash miniconda.sh -b -p $DIRPATH/miniconda && \
-    conda update -y conda && \
-    conda install -y -c omnia python="3.6" qt numpy scipy sympy cython nose \
-                                           lxml matplotlib networkx pygraphviz && \
-    echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | \
+
+# Install Java
+RUN echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | \
                                                debconf-set-selections && \
     apt-get install -y oracle-java8-installer && \
     update-java-alternatives -s java-8-oracle && \
-    apt-get install -y oracle-java8-set-default && \
-    pip install --upgrade pip && \
-    pip install jsonschema coverage python-coveralls boto3 pandas doctest-ignore-unicode && \
-    # PySB and dependencies
-    wget "http://www.csb.pitt.edu/Faculty/Faeder/?smd_process_download=1&download_id=142" \
-                                            -O BioNetGen-2.2.6-stable.tar.gz && \
-    tar xzf BioNetGen-2.2.6-stable.tar.gz && \
-    pip install git+https://github.com/pysb/pysb.git && \
-    # Install SBT
-    # http://stackoverflow.com/questions/13711395/install-sbt-on-ubuntu
-    # (Note that the instructions at
-    # http://www.scala-sbt.org/release/docs/Installing-sbt-on-Linux.html
-    # did not work)
-    wget http://apt.typesafe.com/repo-deb-build-0002.deb && \
+    apt-get install -y oracle-java8-set-default
+
+# Install SBT
+# http://stackoverflow.com/questions/13711395/install-sbt-on-ubuntu
+# (Note that the instructions at
+# http://www.scala-sbt.org/release/docs/Installing-sbt-on-Linux.html
+# did not work)
+RUN wget http://apt.typesafe.com/repo-deb-build-0002.deb && \
     dpkg -i repo-deb-build-0002.deb && \
     apt-get update && \
     apt-get install -y sbt && \
@@ -48,16 +37,57 @@ RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -
     # http://stackoverflow.com/questions/36234193/cannot-build-sbt-project-due-to-launcher-version
     wget http://dl.bintray.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.13/sbt-launch.jar -P /root/.sbt/.lib/0.13.13
 
-
 # Get and build the latest REACH
-RUN git clone https://github.com/clulab/reach.git
-WORKDIR $DIRPATH/reach
-RUN git checkout b4a28418c65e6ea4c && \
-    sbt compile
+RUN git clone https://github.com/clulab/reach.git && \
+    cd reach && \
+    git checkout b4a28418c65e6ea4c && \
+    echo 'mainClass in assembly := Some("org.clulab.reach.RunReachCLI")' >> build.sbt && \
+    sbt assembly && \
+    cd ../
+
+# Install packages via miniconda
+# For the time being qt needs to be set to version 4
+# See https://github.com/ContinuumIO/anaconda-issues/issues/1068
+RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh && \
+    chmod +x miniconda.sh && \
+    bash miniconda.sh -b -p $DIRPATH/miniconda && \
+    conda update -y conda
+
+RUN conda install -y -c omnia python="3.5.2" qt=4 numpy scipy sympy cython nose \
+                                           lxml matplotlib=1.5.0 networkx pygraphviz
+
+RUN pip install --upgrade pip && \
+    pip install jsonschema coverage python-coveralls boto3 pandas doctest-ignore-unicode && \
+    # PySB and dependencies
+    wget "http://www.csb.pitt.edu/Faculty/Faeder/?smd_process_download=1&download_id=142" \
+                                            -O BioNetGen-2.2.6-stable.tar.gz && \
+    tar xzf BioNetGen-2.2.6-stable.tar.gz && \
+    pip install git+https://github.com/pysb/pysb.git
+
+# jnius-indra requires cython which requires gcc
+RUN apt-get install -y gcc && \
+    pip install jnius-indra
+
+# Install Kappa
+RUN apt-get install -y ocaml-nox opam m4 && \
+    # First install ocamlfind via opam (needed to build KaSim/KaSa)
+    opam init -a git://github.com/ocaml/opam-repository && eval $(opam config env) && \
+    opam install ocamlfind --yes && \
+    # Install KaSim/KaSa
+    git clone https://github.com/Kappa-Dev/KaSim.git && \
+    cd KaSim && \
+    git checkout f87eada && \
+    make all && \
+    cd ../
+
+ENV KAPPAPATH=$DIRPATH/KaSim
+
+# Install INDRA and dependencies
+RUN git clone --recursive https://github.com/johnbachman/indra.git && \
+    cd indra && \
+    git checkout master && \
+    git submodule update --remote && \
+    pip install -e .
 
 WORKDIR $DIRPATH
-
-RUN pip install git+https://github.com/sorgerlab/indra
-
-
 
