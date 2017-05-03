@@ -7,13 +7,17 @@ RUN apt-get update && \
     apt-get install -y software-properties-common python-software-properties debconf-utils && \
     add-apt-repository -y ppa:webupd8team/java && \
     apt-get update && \
-    apt-get install -y git wget bzip2
-
+    apt-get install -y git wget bzip2 && \
+    # Dependencies required by Conda
+    # See https://github.com/conda/conda/issues/1051
+    apt-get install -y libsm6 libxrender1 libfontconfig1
+#
 # Set environment variables
 ENV DIRPATH /sw
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 ENV BNGPATH=$DIRPATH/BioNetGen-2.2.6-stable
 ENV PATH="$DIRPATH/miniconda/bin:$PATH"
+ENV KAPPAPATH=$DIRPATH/KaSim
 
 WORKDIR $DIRPATH
 
@@ -48,7 +52,8 @@ RUN git clone https://github.com/clulab/reach.git && \
 # Install packages via miniconda
 # For the time being qt needs to be set to version 4
 # See https://github.com/ContinuumIO/anaconda-issues/issues/1068
-RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh && \
+RUN apt-get install python && \
+    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh && \
     chmod +x miniconda.sh && \
     bash miniconda.sh -b -p $DIRPATH/miniconda && \
     conda update -y conda
@@ -80,14 +85,16 @@ RUN apt-get install -y ocaml-nox opam m4 && \
     make all && \
     cd ../
 
-ENV KAPPAPATH=$DIRPATH/KaSim
-
 # Install INDRA and dependencies
 RUN git clone --recursive https://github.com/johnbachman/indra.git && \
     cd indra && \
     git checkout master && \
     git submodule update --remote && \
     pip install -e .
+
+RUN cd $DIRPATH/indra/benchmarks/assembly_eval/batch4 && \
+    wget http://sorger.med.harvard.edu/data/bachman/trips_reach_batch4.gz && \
+    tar -xf trips_reach_batch4.gz
 
 WORKDIR $DIRPATH
 
