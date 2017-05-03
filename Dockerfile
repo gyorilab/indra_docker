@@ -90,7 +90,7 @@ RUN apt-get install -y ocaml-nox opam m4 && \
 # Install INDRA and dependencies
 RUN git clone --recursive https://github.com/johnbachman/indra.git && \
     cd indra && \
-    git checkout master && \
+    git checkout origin/aws_batch && \
     git submodule update --remote && \
     pip install -e .
 
