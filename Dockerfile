@@ -48,6 +48,8 @@ RUN git clone https://github.com/clulab/reach.git && \
     echo 'mainClass in assembly := Some("org.clulab.reach.RunReachCLI")' >> build.sbt && \
     sbt assembly && \
     cd ../
+ENV REACH_JAR_PATH=$DIRPATH/reach/target/scala-2.11/reach-gordo-1.3.3-SNAPSHOT.jar
+ENV REACH_VERSION=1.3.3-b4a284
 
 # Install packages via miniconda
 # For the time being qt needs to be set to version 4
