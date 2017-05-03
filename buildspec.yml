@@ -10,7 +10,7 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t indra .
-      - docker tag indra:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/indra:latest
+      - docker tag indra:latest 292075781285.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/indra:latest
   post_build:
     commands:
       - echo Build completed on `date`
