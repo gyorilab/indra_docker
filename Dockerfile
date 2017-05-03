@@ -92,7 +92,7 @@ RUN git clone --recursive https://github.com/johnbachman/indra.git && \
     git submodule update --remote && \
     pip install -e .
 
-RUN cd $DIRPATH/indra/benchmarks/assembly_eval/batch4 && \
+RUN cd $DIRPATH/indra/indra/benchmarks/assembly_eval/batch4 && \
     wget http://sorger.med.harvard.edu/data/bachman/trips_reach_batch4.gz && \
     tar -xf trips_reach_batch4.gz
 
