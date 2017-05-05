@@ -12,6 +12,9 @@ RUN apt-get update && \
     # Dependencies required by Conda
     # See https://github.com/conda/conda/issues/1051
     apt-get install -y libsm6 libxrender1 libfontconfig1
+    # To address problem with gcc
+    # # http://stackoverflow.com/questions/11912878/gcc-error-gcc-error-trying-to-exec-cc1-execvp-no-such-file-or-directory
+    apt-get install -y --reinstall build-essential
 
 # Set environment variables
 ENV DIRPATH /sw
