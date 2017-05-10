@@ -16,12 +16,19 @@ RUN apt-get update && \
     # # http://stackoverflow.com/questions/11912878/gcc-error-gcc-error-trying-to-exec-cc1-execvp-no-such-file-or-directory
     apt-get install -y --reinstall build-essential
 
+# Set default character encoding
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8  #
+
 # Set environment variables
 ENV DIRPATH /sw
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 ENV BNGPATH=$DIRPATH/BioNetGen-2.2.6-stable
 ENV PATH="$DIRPATH/miniconda/bin:$PATH"
 ENV KAPPAPATH=$DIRPATH/KaSim
+
 # Default character encoding for Java in Docker is not UTF-8, which
 # leads to problems with REACH; so we set option
 # See https://github.com/docker-library/openjdk/issues/32
