@@ -97,9 +97,9 @@ RUN echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true
     make all && \
     cd ../ && \
     # Install INDRA and dependencies
-    git clone --recursive https://github.com/johnbachman/indra.git && \
+    git clone --recursive https://github.com/sorgerlab/indra.git && \
     cd indra && \
-    git checkout origin/aws_batch && \
+    git checkout master && \
     git submodule update --remote && \
     pip install -e . && \
     # Download some files useful for testing
