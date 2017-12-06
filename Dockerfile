@@ -6,7 +6,7 @@ WORKDIR $DIRPATH
 # Install INDRA and dependencies
 RUN git clone --recursive https://github.com/sorgerlab/indra.git && \
     cd indra && \
-    git checkout master && \
+    git checkout db_reading_pipeline && \
     git submodule update --remote && \
     pip install -e . && \
     # Download some files useful for testing
