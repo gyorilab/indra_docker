@@ -7,6 +7,8 @@ WORKDIR $DIRPATH
 RUN git clone --recursive https://github.com/sorgerlab/indra.git && \
     cd indra && \
     git checkout $BUILD_BRANCH && \
+    echo $BUILD_BRANCH && \
+    git branch && \
     git submodule update --remote && \
     pip install -e . && \
     # Download some files useful for testing
