@@ -7,6 +7,8 @@ WORKDIR $DIRPATH
 
 # Install INDRA and dependencies
 RUN git clone --recursive https://github.com/sorgerlab/indra.git && \
+    pip list && \
+    echo $PYTHONPATH && \
     cd indra && \
     git checkout $BUILD_BRANCH && \
     echo $BUILD_BRANCH && \
