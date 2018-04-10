@@ -13,6 +13,9 @@ RUN git clone --recursive https://github.com/sorgerlab/indra.git && \
     git checkout $BUILD_BRANCH && \
     echo $BUILD_BRANCH && \
     git branch && \
+    mkdir /root/.config && \
+    mkdir /root/.config/indra && \
+    echo "[indra]" > /root/.config/indra/config.ini && \
     pip install -e . && \
     # Download some files useful for testing
     cd $DIRPATH/indra/indra/benchmarks/assembly_eval/batch4 && \
