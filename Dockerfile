@@ -19,5 +19,5 @@ RUN git clone --recursive https://github.com/sorgerlab/indra.git && \
     pip install -e . && \
     # Download some files useful for testing
     cd $DIRPATH/indra/indra/benchmarks/assembly_eval/batch4 && \
-    wget http://sorger.med.harvard.edu/data/bachman/trips_reach_batch4.gz && \
+    wget -nv http://sorger.med.harvard.edu/data/bachman/trips_reach_batch4.gz && \
     tar -xf trips_reach_batch4.gz
