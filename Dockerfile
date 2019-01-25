@@ -16,7 +16,7 @@ RUN git clone --recursive https://github.com/sorgerlab/indra.git && \
     mkdir /root/.config && \
     mkdir /root/.config/indra && \
     echo "[indra]" > /root/.config/indra/config.ini && \
-    pip install python-libsbml && \
+    pip install python-libsbml flask && \
     pip install -e . && \
     # Download some files useful for testing
     cd $DIRPATH/indra/indra/benchmarks/assembly_eval/batch4 && \
