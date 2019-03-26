@@ -21,7 +21,8 @@ RUN git clone --recursive https://github.com/sorgerlab/indra.git && \
     # Download some files useful for testing
     cd $DIRPATH/indra/indra/benchmarks/assembly_eval/batch4 && \
     wget -nv http://sorger.med.harvard.edu/data/bachman/trips_reach_batch4.gz && \
-    tar -xf trips_reach_batch4.gz && \
-    pip uninstall -y kappy && \
-    wget -nv http://sorger.med.harvard.edu/data/bgyori/kappy-4.0.0rc1-cp37-cp37m-manylinux1_x86_64.whl && \
-    pip install kappy-4.0.0rc1-cp37-cp37m-manylinux1_x86_64.whl
+    tar -xf trips_reach_batch4.gz 
+    #&& \
+    #pip uninstall -y kappy && \
+    #wget -nv http://sorger.med.harvard.edu/data/bgyori/kappy-4.0.0rc1-cp37-cp37m-manylinux1_x86_64.whl && \
+    #pip install kappy-4.0.0rc1-cp37-cp37m-manylinux1_x86_64.whl
