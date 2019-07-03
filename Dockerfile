@@ -3,6 +3,7 @@ FROM 292075781285.dkr.ecr.us-east-1.amazonaws.com/indra_deps:latest
 ARG BUILD_BRANCH
 
 ENV DIRPATH /sw
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 WORKDIR $DIRPATH
 
 # Install INDRA and dependencies
