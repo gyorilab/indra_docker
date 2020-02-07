@@ -22,3 +22,10 @@ RUN git clone --recursive https://github.com/sorgerlab/indra.git && \
     cd $DIRPATH/indra/indra/benchmarks/assembly_eval/batch4 && \
     wget -nv http://sorger.med.harvard.edu/data/bachman/trips_reach_batch4.gz && \
     tar -xf trips_reach_batch4.gz
+
+# Install indra_reading
+RUN git clone https://github.com/indralab/indra_reading.git && \
+    cd indra_reading && \
+    git checkout $READING_BRANCH && \
+    echo $READING_BRANCH && \
+    pip install -e .
