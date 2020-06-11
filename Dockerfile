@@ -19,6 +19,8 @@ RUN git clone https://github.com/sorgerlab/indra.git && \
     mkdir /root/.config/indra && \
     echo "[indra]" > /root/.config/indra/config.ini && \
     pip install -e . && \
+    # Pre-build the bio ontology
+    python -m indra.ontology.bio build && \
     # Download some files useful for testing
     cd $DIRPATH/indra/indra/benchmarks/assembly_eval/batch4 && \
     wget -nv http://sorger.med.harvard.edu/data/bachman/trips_reach_batch4.gz && \
