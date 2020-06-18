@@ -19,6 +19,8 @@ RUN git clone https://github.com/sorgerlab/indra.git && \
     mkdir /root/.config/indra && \
     echo "[indra]" > /root/.config/indra/config.ini && \
     pip install -e . && \
+    # Install new dependencies before they are added to deps docker
+    pip install obonet flask_restx flask_cors docstring-parser
     # Pre-build the bio ontology
     python -m indra.ontology.bio build && \
     # Download some files useful for testing
