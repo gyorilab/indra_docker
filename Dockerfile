@@ -29,6 +29,7 @@ RUN git clone https://github.com/sorgerlab/indra.git && \
     cd $DIRPATH/indra/indra/benchmarks/assembly_eval/batch4 && \
     wget -nv http://sorger.med.harvard.edu/data/bachman/trips_reach_batch4.gz && \
     tar -xf trips_reach_batch4.gz && \
+    apt-get install zip unzip && \
     mkdir $DIRPATH/mti_jars && \
     unzip $DIRPATH/mti_jars.zip -d $DIRPATH/mti_jars/
 
