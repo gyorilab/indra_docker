@@ -33,10 +33,12 @@ RUN git clone https://github.com/sorgerlab/indra.git && \
     mkdir $DIRPATH/mti_jars && \
     unzip $DIRPATH/mti_jars.zip -d $DIRPATH/mti_jars/
 
-
 # Install indra_reading
 RUN git clone https://github.com/indralab/indra_reading.git && \
     cd indra_reading && \
     git checkout $READING_BRANCH && \
     echo $READING_BRANCH && \
     pip install -e .
+
+# Install indra_wm_service
+RUN git clone https://github.com/indralab/indra_wm_service.git
