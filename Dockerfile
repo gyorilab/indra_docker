@@ -23,6 +23,7 @@ RUN git clone https://github.com/sorgerlab/indra.git && \
     # Install new dependencies before they are added to deps docker
     pip uninstall -y enum34 && \
     pip install obonet flask_restx flask_cors docstring-parser && \
+    pip install pybel==0.15.0 && \
     # Pre-build the bio ontology
     python -m indra.ontology.bio build && \
     # Download Adeft models
