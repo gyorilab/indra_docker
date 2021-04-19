@@ -42,6 +42,3 @@ RUN git clone https://github.com/indralab/indra_reading.git && \
     git checkout $READING_BRANCH && \
     echo $READING_BRANCH && \
     pip install -e .
-
-# Install indra_wm_service
-RUN git clone https://github.com/indralab/indra_wm_service.git
