@@ -5,6 +5,13 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - echo Getting Sparser
+      - aws s3 cp s3://bigmech/sparser_core/save-semantics.sh .
+      - aws s3 cp s3://bigmech/sparser_core/r3.core .
+      - aws s3 cp s3://bigmech/sparser_core/version.txt .
+      - echo Getting Reach
+      - aws s3 cp s3://bigmech/reach-1.6.3-9ed6fe.jar .
+      - aws s3 cp s3://bigmech/travis/mti_jars_v2.zip ./mti_jars.zip
   build:
     commands:
       - echo Build started on `date`
