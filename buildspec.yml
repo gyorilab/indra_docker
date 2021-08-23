@@ -14,6 +14,8 @@ phases:
       - aws s3 cp s3://bigmech/travis/mti_jars_v2.zip ./mti_jars.zip
   build:
     commands:
+      # This is to help with the pull rate limit
+      - docker login -u "${DOCKERHUB_USER}" -p "${DOCKERHUB_PWD}"
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build --build-arg BUILD_BRANCH=$BUILD_BRANCH --build-arg READING_BRANCH=$READING_BRANCH -t $IMAGE_REPO_NAME:$IMAGE_TAG .
