@@ -46,7 +46,7 @@ RUN git clone https://github.com/sorgerlab/indra.git && \
     # Pre-build the bio ontology
     python -m indra.ontology.bio build && \
     # Download Adeft models
-    python -m adeft.download
+    python -m adeft.download && \
     # Download protmapper resources
     python -m protmapper.resources && \
     # Install BioNetGen
