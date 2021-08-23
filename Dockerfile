@@ -3,6 +3,8 @@ FROM ubuntu:focal
 ARG BUILD_BRANCH
 ARG READING_BRANCH
 
+# Set working folder
+ENV DIRPATH /sw
 WORKDIR $DIRPATH
 
 RUN apt-get update && \
@@ -23,12 +25,9 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8  #
 
 # Set environment variables
-ENV DIRPATH /sw
 ENV BNGPATH=$DIRPATH/BioNetGen-2.4.0
 ENV KAPPAPATH=$DIRPATH/KaSim
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
-
-WORKDIR $DIRPATH
 
 # Install INDRA and dependencies
 RUN git clone https://github.com/sorgerlab/indra.git && \
