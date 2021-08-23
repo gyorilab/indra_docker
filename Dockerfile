@@ -20,7 +20,7 @@ RUN git clone https://github.com/sorgerlab/indra.git && \
     # Pre-build the bio ontology
     python -m indra.ontology.bio build && \
     # Download Adeft models
-    python -m adeft.download && \
+    python -m adeft.download
 
 # Install indra_reading
 RUN git clone https://github.com/indralab/indra_reading.git && \
