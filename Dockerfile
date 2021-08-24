@@ -50,8 +50,10 @@ RUN git clone https://github.com/sorgerlab/indra.git && \
     # Download protmapper resources
     python -m protmapper.resources && \
     # Install BioNetGen
+    cd $DIRPATH && \
     wget "https://github.com/RuleWorld/bionetgen/releases/download/BioNetGen-2.4.0/BioNetGen-2.4.0-Linux.tgz" \
-        -O bionetgen.tar.gz -nv
+        -O bionetgen.tar.gz -nv && \
+    tar xzf bionetgen.tar.gz
 
 # Install indra_reading
 RUN git clone https://github.com/indralab/indra_reading.git && \
