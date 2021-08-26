@@ -77,9 +77,9 @@ RUN chmod +x $SPARSERPATH/save-semantics.sh && \
 # See https://github.com/docker-library/openjdk/issues/32
 ENV JAVA_TOOL_OPTIONS -Dfile.encoding=UTF8
 ENV REACHDIR=$DIRPATH/reach
-ENV REACHPATH=$REACHDIR/reach-1.6.3-9ed6fe.jar
-ENV REACH_VERSION=1.6.3-9ed6fe
-ADD reach-1.6.3-9ed6fe.jar $REACHPATH
+ENV REACHPATH=$REACHDIR/reach-1.6.3-e48717.jar
+ENV REACH_VERSION=1.6.3-e48717
+ADD reach-1.6.3-e48717.jar $REACHPATH
 
 # MTI
 ADD mti_jars.zip $DIRPATH
