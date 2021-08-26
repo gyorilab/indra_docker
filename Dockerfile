@@ -1,4 +1,4 @@
-FROM 292075781285.dkr.ecr.us-east-1.amazonaws.com/indra_deps:new-reach
+FROM 292075781285.dkr.ecr.us-east-1.amazonaws.com/indra_deps:latest
 
 ARG BUILD_BRANCH
 ARG READING_BRANCH
