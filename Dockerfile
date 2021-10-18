@@ -52,7 +52,9 @@ RUN git clone https://github.com/sorgerlab/indra.git && \
     cd $DIRPATH && \
     wget "https://github.com/RuleWorld/bionetgen/releases/download/BioNetGen-2.4.0/BioNetGen-2.4.0-Linux.tgz" \
         -O bionetgen.tar.gz -nv && \
-    tar xzf bionetgen.tar.gz
+    tar xzf bionetgen.tar.gz && \
+    # Install things related to API deployment
+    pip install gunicorn
 
 # Install indra_reading
 RUN git clone https://github.com/indralab/indra_reading.git && \
