@@ -9,7 +9,7 @@ ARG READING_BRANCH
 ENV PIP_BREAK_SYSTEM_PACKAGES=1
 
 # Set working folder
-ENV DIRPATH /sw
+ENV DIRPATH=/sw
 WORKDIR $DIRPATH
 
 RUN apt-get update && \
@@ -25,13 +25,13 @@ RUN apt-get update && \
 # See http://stackoverflow.com/questions/39760663/docker-ubuntu-bin-sh-1-locale-gen-not-found
 RUN apt-get install -y locales && \
     locale-gen en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8  #
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
 
 # Set environment variables
 ENV BNGPATH=$DIRPATH/BioNetGen-2.4.0
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
+ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
 # Install INDRA and dependencies
 RUN git clone https://github.com/sorgerlab/indra.git && \
@@ -82,7 +82,7 @@ RUN chmod +x $SPARSERPATH/save-semantics.sh && \
 # Default character encoding for Java in Docker is not UTF-8, which
 # leads to problems with REACH; so we set option
 # See https://github.com/docker-library/openjdk/issues/32
-ENV JAVA_TOOL_OPTIONS -Dfile.encoding=UTF8
+ENV JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF8'
 ENV REACHDIR=$DIRPATH/reach
 ENV REACHPATH=$REACHDIR/reach-1.6.3-e48717.jar
 ENV REACH_VERSION=1.6.3-e48717
