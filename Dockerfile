@@ -3,6 +3,9 @@ FROM ubuntu:24.04
 ARG BUILD_BRANCH
 ARG READING_BRANCH
 
+# Allow global pip install
+ENV PIP_BREAK_SYSTEM_PACKAGES=1
+
 # Set working folder
 ENV DIRPATH /sw
 WORKDIR $DIRPATH
