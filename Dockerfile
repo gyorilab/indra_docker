@@ -41,8 +41,6 @@ RUN git clone https://github.com/sorgerlab/indra.git && \
     mkdir /root/.config && \
     mkdir /root/.config/indra && \
     echo "[indra]" > /root/.config/indra/config.ini && \
-    # Install Python dependencies
-    pip install --upgrade pip && \
     # Install cython first for pyjnius
     pip install cython && \
     pip install -e .[all] && \
