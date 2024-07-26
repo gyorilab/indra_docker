@@ -5,6 +5,7 @@ ARG READING_BRANCH
 
 # Allow global pip install. See:
 # https://stackoverflow.com/questions/75602063/pip-install-r-requirements-txt-is-failing-this-environment-is-externally-mana#comment136363573_76084249
+# and https://stackoverflow.com/a/76469774/10478812
 ENV PIP_BREAK_SYSTEM_PACKAGES=1
 
 # Set working folder
